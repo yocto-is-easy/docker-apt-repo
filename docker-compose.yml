@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  debpack:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: debpack-host
+    hostname: debpack
+    container_name: debpack-container
+    tty: true
+    privileged: true
+    ports:
+      - "49160:22"
+      - "49161:80"
+    volumes:
+      - ./keys:/docker/keys
+    networks:
+      debpack-net:
+        ipv4_address: 2.2.0.2
+
+networks:
+  debpack-net:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 2.2.0.0/16
+         gateway: 2.2.0.1

@@ -1,0 +1,20 @@
+OUTDIR=/repository/debian
+BASEDIR=/var/lib/reprepro
+INCOMEDIR=/docker/incoming
+
+# import new packages
+echo 'Importing new packages...'
+
+cd $INCOMEDIR
+reprepro -V --basedir $BASEDIR \
+    --keepunreferencedfiles --outdir $OUTDIR \
+    includedeb stable *.deb
+
+echo 'Done.'
+
+# clear incoming
+echo 'Clearing incoming directory...'
+
+rm -f ${INCOMEDIR}/*.deb
+
+echo 'Done.'

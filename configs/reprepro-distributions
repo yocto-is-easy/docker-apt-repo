@@ -1,0 +1,8 @@
+Origin: Mykhailo Didur
+Label: Mocto repository
+Suite: stable
+Codename: mocto
+Version: 0.1
+Architectures: arm64
+Components: main
+Description: Simple repository for yocto Raspberry Pi
