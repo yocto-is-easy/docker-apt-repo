@@ -4,7 +4,7 @@ LABEL maintainer="Mykhailo Didur <mikhaildidur2003@gmail.com>"
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 
-RUN apt-get install -q -y supervisor cron openssh-server pwgen reprepro screen vim-tiny nginx nano
+RUN apt-get install -q -y supervisor cron openssh-server pwgen reprepro screen vim-tiny nginx nano git
 
 RUN sed -i 's/\(session *required *pam_loginuid.so\)/#\1/' /etc/pam.d/cron
 
@@ -43,6 +43,11 @@ RUN chmod 755 /usr/local/sbin/start
 
 ADD scripts/deb-import /usr/local/sbin/deb-import
 RUN chmod 755 /usr/local/sbin/deb-import
+
+# import mocto-packets
+RUN git clone https://github.com/yocto-is-easy/mocto-packets.git /docker/incoming/mocto-packets
+RUN cp /docker/incoming/mocto-packets/repos/*.deb /docker/incoming
+RUN rm -rf /docker/incoming/mocto-packets
 
 VOLUME ["/docker/keys", "/docker/incoming", "/repository"]
 

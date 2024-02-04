@@ -11,9 +11,6 @@ for key in /docker/keys/*.pub ; do
 done
 chown -R user /home/user/.ssh
 
-# load crontab for root
-crontab <<EOF
-* * * * * /usr/local/sbin/reprepro-import >> /var/log/reprepro.log
-EOF
+/usr/local/sbin/deb-import >> /var/log/deb-import_startup.log
 
 supervisord -n
